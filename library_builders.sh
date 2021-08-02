@@ -371,8 +371,10 @@ function check_sha256sum {
 
 function build_openssl {
     if [ -e openssl-stamp ]; then return; fi
+    echo "############################  $OPENSSL_ROOT #####################"
     fetch_unpack ${OPENSSL_DOWNLOAD_URL}/${OPENSSL_ROOT}.tar.gz
     check_sha256sum $ARCHIVE_SDIR/${OPENSSL_ROOT}.tar.gz ${OPENSSL_HASH}
+    ls
     (cd ${OPENSSL_ROOT} \
         && ./config no-ssl2 no-shared -fPIC --prefix=$BUILD_PREFIX \
         && make -j4 \
